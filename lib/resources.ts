@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { supabaseServer } from './supabase'
+import { supabaseServer } from './supabase-server'
 import type { ResourceRow } from './cms-schemas'
 
 export type Resource = {

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { requireAdmin } from '@/lib/admin-auth'
-import { supabaseServer } from '@/lib/supabase'
+import { supabaseServer } from '@/lib/supabase-server'
 import { CONTENT_TABLE, isContentType } from '@/lib/cms-schemas'
 
 export const dynamic = 'force-dynamic'

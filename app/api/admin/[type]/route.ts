@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { supabaseServer } from '@/lib/supabase'
+import { supabaseServer } from '@/lib/supabase-server'
 import { requireAdminApi, AdminAuthError } from '@/lib/admin-auth'
 import {
   CONTENT_TABLE,

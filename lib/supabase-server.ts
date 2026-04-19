@@ -1,8 +1,7 @@
-import { createServerClient, createBrowserClient } from '@supabase/ssr'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
 // Cookie domain: .bnzo.io in prod, undefined in preview/local
@@ -26,8 +25,4 @@ export function supabaseServer() {
       },
     },
   })
-}
-
-export function supabaseBrowser() {
-  return createBrowserClient(supabaseUrl, supabaseAnonKey)
 }

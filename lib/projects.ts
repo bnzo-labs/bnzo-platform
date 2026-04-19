@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { supabaseServer } from './supabase'
+import { supabaseServer } from './supabase-server'
 import type { ProjectRow } from './cms-schemas'
 
 export type ProjectStatus = 'Live' | 'Beta' | 'In Progress'

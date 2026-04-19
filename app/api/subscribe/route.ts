@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z, ZodError } from 'zod'
-import { supabaseServer } from '@/lib/supabase'
+import { supabaseServer } from '@/lib/supabase-server'
 import { sendWelcomeEmail } from '@/lib/resend'
 
 export const dynamic = 'force-dynamic'

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabaseBrowser } from '@/lib/supabase'
+import { supabaseBrowser } from '@/lib/supabase-client'
 
 export default function AdminCallback() {
   const router = useRouter()
