@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
 export const alt = 'Build — Developer Resources from bnzo'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -81,12 +80,15 @@ export default function Image() {
             letterSpacing: '-0.04em',
             lineHeight: 0.95,
             marginBottom: '24px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          Developer
-          <br />
-          Resources
-          <span style={{ color: LIME }}>.</span>
+          <div>Developer</div>
+          <div style={{ display: 'flex' }}>
+            <div>Resources</div>
+            <div style={{ color: LIME }}>.</div>
+          </div>
         </div>
 
         {/* Sub */}

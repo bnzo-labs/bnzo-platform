@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
 export const alt = 'bnzo Lab — Case Studies & Experiments'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -34,7 +33,7 @@ export default function Image() {
             right: '0',
             width: '360px',
             height: '360px',
-            background: `conic-gradient(from 180deg at 100% 100%, ${LIME}30, transparent 40%)`,
+            background: `radial-gradient(circle at bottom right, ${LIME}30, transparent 60%)`,
           }}
         />
 
@@ -80,12 +79,15 @@ export default function Image() {
             letterSpacing: '-0.04em',
             lineHeight: 0.95,
             marginBottom: '24px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          Case
-          <br />
-          Studies
-          <span style={{ color: LIME }}>.</span>
+          <div>Case</div>
+          <div style={{ display: 'flex' }}>
+            <div>Studies</div>
+            <div style={{ color: LIME }}>.</div>
+          </div>
         </div>
 
         {/* Sub */}

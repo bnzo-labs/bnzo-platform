@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
 export const alt = 'Learn to Build with AI Agents — bnzo'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -65,12 +64,15 @@ export default function Image() {
             lineHeight: 0.95,
             marginBottom: '24px',
             paddingLeft: '32px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          Learn to Build
-          <br />
-          <span>with AI Agents</span>
-          <span style={{ color: LIME }}>.</span>
+          <div>Learn to Build</div>
+          <div style={{ display: 'flex' }}>
+            <div>with AI Agents</div>
+            <div style={{ color: LIME }}>.</div>
+          </div>
         </div>
 
         {/* Sub */}

@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
 export const alt = 'Erick Benzo — Fullstack Developer & Founder'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -31,7 +30,8 @@ export default function Image() {
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `linear-gradient(${CHALK}06 1px, transparent 1px), linear-gradient(90deg, ${CHALK}06 1px, transparent 1px)`,
+            opacity: 0.06,
+            backgroundImage: `linear-gradient(${CHALK} 1px, transparent 1px), linear-gradient(90deg, ${CHALK} 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
           }}
         />
@@ -62,12 +62,15 @@ export default function Image() {
             letterSpacing: '-0.04em',
             lineHeight: 0.95,
             marginBottom: '24px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          Erick
-          <br />
-          Benzo
-          <span style={{ color: LIME }}>.</span>
+          <div>Erick</div>
+          <div style={{ display: 'flex' }}>
+            <div>Benzo</div>
+            <div style={{ color: LIME }}>.</div>
+          </div>
         </div>
 
         {/* Role */}
