@@ -1,0 +1,62 @@
+---
+title: bnzo Starter Kit
+description: Multi-domain Next.js 14 template. One codebase, five domains via middleware rewrite. Supabase + Stripe + Resend wired in. Ship a studio, a marketplace, a lab, and a blog in one deploy.
+price: 9700
+priceId: process.env.STRIPE_PRICE_STARTER_KIT
+tier: paid
+tags:
+  - nextjs
+  - template
+  - monorepo
+  - supabase
+  - stripe
+downloadUrl: null
+---
+
+# bnzo Starter Kit
+
+You don't need five codebases for five domains. You need one — with a middleware that knows where to route.
+
+This is that codebase. Built by agents. Running in production. Available to you.
+
+## What's included
+
+**Multi-domain middleware**
+Host-based routing via Next.js middleware. One Vercel project, five subdomains. No extra infrastructure.
+
+**Supabase wiring**
+Server and browser clients ready. Cookie domain set for cross-subdomain sessions. `purchases` and `subscribers` tables with RLS scaffolded.
+
+**Stripe checkout**
+`/api/checkout` creates sessions. `/api/webhooks/stripe` verifies signatures and writes purchase records. Price IDs from env — no hardcoded values.
+
+**Resend email**
+`/api/subscribe` captures emails, writes to Supabase, sends welcome email. Source-tagged so you know which domain drove signups.
+
+**Brand components**
+`Wordmark` and `Footer` shared across all domains. Syne + DM Sans + Geist Mono loaded via `next/font`.
+
+**MDX content layer**
+`/content/resources/*.mdx` and `/content/projects/*.mdx`. No CMS needed at launch. Add one when you're ready.
+
+**Five domain layouts**
+Home, Build, Lab, Learn, Founder — each with scoped nav and metadata.
+
+## Why buy it
+
+Building multi-domain in Next.js has sharp edges. Cookie domains, middleware edge cases, shared auth state, per-domain metadata — these take time to get right.
+
+We got them wrong, fixed them, and the fixes are in this repo. You get the working version on day one.
+
+## How it helps
+
+- Skip 2-3 weeks of infrastructure setup
+- Start with working Stripe + Supabase integration
+- Ship all five domains from a single Vercel deploy
+- Use the MDX content layer to add resources and case studies without touching code
+
+## Who it's for
+
+Builders shipping multi-domain products. Agency founders who need a studio + marketplace + portfolio without three separate repos. Developers who want a starting point that isn't a toy demo.
+
+The starter kit is this platform — the one you're looking at — with the domain-specific content stripped out. Real code, real architecture, ready to fork.

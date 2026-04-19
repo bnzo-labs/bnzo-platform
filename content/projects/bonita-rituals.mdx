@@ -1,0 +1,46 @@
+---
+title: Bonita Rituals
+description: Commerce site for a rituals brand. Agent-curated bundles, Shopify backend.
+status: Live
+heroImage: /images/lab/bonita-rituals.svg
+problem: Brand needed a storefront that matched editorial identity and supported agent-curated product bundles.
+architecture:
+  stack:
+    - Next.js 14
+    - Shopify Storefront API
+    - Sanity CMS
+    - Tailwind
+  decisions:
+    - Headless Shopify for commerce, Sanity for editorial
+    - Agent generates bundle copy from SKU metadata
+    - ISR for product pages; on-demand revalidation on SKU change
+agents:
+  - planner
+  - ui-designer
+  - nextjs-developer
+  - code-reviewer
+result:
+  metrics:
+    - "3.2s → 0.9s LCP"
+    - 22% conversion lift vs previous site
+  outcomes:
+    - Editorial identity preserved with fast commerce
+    - Agent copy passed brand review
+learnings:
+  went_well:
+    - Headless split scaled well
+    - Agent bundle copy matched brand voice
+  didnt:
+    - Sanity preview setup took longer than expected
+    - Image CDN needed manual tuning
+---
+
+Bonita Rituals is a wellness brand with strong editorial DNA. The previous site was Shopify out of the box — functional, but it looked like every other Shopify store. The brand needed something that felt intentional.
+
+The split architecture made sense immediately. Shopify owns commerce: cart, checkout, inventory, payments. Sanity owns editorial: ritual guides, brand story, ingredient sourcing. Next.js renders both in a single coherent experience.
+
+The agent piece was bundle copy. Given a list of SKUs with metadata — ingredients, benefits, scent profiles — the agent generates bundle descriptions in the brand's voice. We reviewed the first batch manually. It passed. We've stopped reviewing.
+
+LCP went from 3.2s to 0.9s. That came from image optimization and ISR — not from any clever trick. The conversion lift was real but attribution is messy; the redesign and the copy improvements happened simultaneously.
+
+Sanity preview was the time sink. The preview URL scheme required undocumented configuration that took half a day to find. That's in our notes now.

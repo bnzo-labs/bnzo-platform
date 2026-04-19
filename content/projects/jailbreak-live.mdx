@@ -1,0 +1,48 @@
+---
+title: Jailbreak
+description: Browser multiplayer game with Claude-driven NPC agents.
+status: In Progress
+heroImage: /images/lab/jailbreak.svg
+problem: Most multiplayer games use scripted NPCs. What if NPCs reasoned, planned, and reacted in natural language?
+architecture:
+  stack:
+    - Colyseus 0.15
+    - PixiJS 7
+    - Anthropic Claude
+    - Node.js
+  decisions:
+    - Colyseus for authoritative server state
+    - Per-agent LLM prompt with tool calls for game actions
+    - Token budget caps per tick to control cost
+agents:
+  - game-designer
+  - networking-developer
+  - engine-developer
+  - ai-agent-developer
+result:
+  metrics:
+    - 60fps with 8 concurrent agents
+    - "< $0.02 per full match in LLM cost"
+  outcomes:
+    - Proved agent-driven NPCs ship
+    - Built reusable game-agent harness
+learnings:
+  went_well:
+    - Tool-call loop kept agents in bounds
+    - Server-authoritative state prevented cheating
+  didnt:
+    - Early prompts leaked state; required careful redaction
+    - Latency spikes on cold agents
+---
+
+Jailbreak is a browser multiplayer game where the NPCs are Claude agents. Players interact with characters that reason, plan, and respond in natural language. Not scripted. Not decision trees. Actual LLM inference, per tick, per agent.
+
+The architecture question was: how do you run LLM-driven game characters without the game feeling like you're waiting for an API call?
+
+The answer: tool calls. Each agent has a limited set of actions — move, speak, investigate, alert. The LLM picks one per turn. The prompt is tight, the action space is bounded, and token budget caps prevent runaway cost.
+
+Colyseus handles server-authoritative state. PixiJS renders client-side. The agents live on the server. Clients see the result of agent decisions, not the decisions themselves.
+
+The prompt engineering was the real work. Early versions let agents see full room state, which led to leaked information between "competing" agents. The redaction layer — giving each agent a limited view of game state — fixed behavior but added latency. That latency is still the main open problem.
+
+$0.02 per full match at the current token budget. That's viable.

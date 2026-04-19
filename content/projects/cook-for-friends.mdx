@@ -1,0 +1,46 @@
+---
+title: Cook for Friends
+description: Recipe coordination app for shared dinners. Agent-assisted meal planning.
+status: Beta
+heroImage: /images/lab/cook-for-friends.svg
+problem: Groups struggle to coordinate dinners. Dietary conflicts, duplicate ingredients, and last-minute chaos waste time and food.
+architecture:
+  stack:
+    - Next.js 14
+    - Supabase
+    - Anthropic Claude
+    - Tailwind
+  decisions:
+    - Agent plans menus from group preferences
+    - Server actions for coordination; no client-side state
+    - Supabase realtime for shared grocery list
+agents:
+  - planner
+  - nextjs-developer
+  - ai-agent-developer
+  - code-reviewer
+result:
+  metrics:
+    - 40 dinners coordinated in closed beta
+    - 85% repeat usage among hosts
+  outcomes:
+    - Validated agent-first product loop
+    - Uncovered dietary-preference edge cases
+learnings:
+  went_well:
+    - Agent framing reduced UX complexity
+    - Supabase realtime was trivial to wire
+  didnt:
+    - Grocery store API integration slipped scope
+    - Underestimated cold-start latency for LLM calls
+---
+
+Cook for Friends started as a question: can an agent replace the group chat chaos that happens before every shared dinner?
+
+The answer is mostly yes. The agent handles menu planning, dietary conflict resolution, and grocery list generation. Hosts share a link. Guests mark preferences. The agent proposes a menu that works for everyone.
+
+The hard part wasn't the LLM. It was the edge cases: vegan + nut allergy + gluten-free in the same group, or guests who don't respond before the planning deadline. We handled both. The grocery API integration didn't make the beta cut.
+
+Cold-start latency on the LLM calls was the other surprise. Users tolerate it once they understand the agent is "thinking," but the first load before any context is cached is rough.
+
+Still in beta. The core loop works. Expanding to larger groups is the next milestone.

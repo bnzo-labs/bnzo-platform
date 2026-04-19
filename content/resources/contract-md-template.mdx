@@ -1,0 +1,59 @@
+---
+title: CONTRACT.md Template
+description: Interface contract template for multi-agent codebases. Treat as source of truth between modules.
+price: 0
+priceId: null
+tier: free
+tags:
+  - contract
+  - agents
+  - architecture
+downloadUrl: /downloads/contract-md-template.md
+---
+
+# CONTRACT.md Template
+
+In a multi-agent codebase, agents write code independently. Without an explicit contract, they make incompatible assumptions. One agent's `createCheckoutSession` returns `{ url }`. Another expects `{ sessionUrl }`. The build fails.
+
+CONTRACT.md prevents that.
+
+## What it is
+
+A machine-readable interface document that lives at `docs/CONTRACT.md`. It defines exact shapes for every boundary in your system:
+
+- Middleware rewrites
+- Shared library exports
+- API route request/response shapes
+- Database schemas
+- Component props
+- Environment variables
+
+Every agent reads it before writing code. If the contract says `{ url: string }`, every agent returns `{ url: string }`.
+
+## When to use it
+
+Use CONTRACT.md when:
+- More than one agent will touch the same codebase
+- You have shared libraries consumed by multiple pages or routes
+- Your API routes are called by client components written by a different agent
+- You want to catch integration bugs before runtime
+
+## What's included
+
+- CONTRACT.md template with annotated sections
+- Middleware contract block
+- Shared library exports format
+- API contract format with request/response shapes
+- DB schema table format
+- Component props format
+- Environment variable manifest
+
+## How to use it
+
+1. Download the template
+2. Fill in your actual API shapes and DB schemas
+3. Define shared library exports before agents start writing consumers
+4. Reference it in CLAUDE.md so every agent knows where to look
+5. Update it as contracts evolve — never let it drift from the code
+
+The template is opinionated but lightweight. No tooling required. A markdown file your agents can read directly.

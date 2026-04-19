@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Brand Tokens ─────────────────────────────────────────────── */
+:root {
+  --color-ink:       #0C0C0C;
+  --color-chalk:     #F5F4EF;
+  --color-lime:      #C8FF00;
+  --color-lime-deep: #3F5F00;
+  --color-slate:     #6B6868;
+
+  /* Fluid type scale */
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.82rem + 0.27vw, 1rem);
+  --text-base: clamp(1rem,     0.92rem + 0.4vw,  1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.6vw,  1.375rem);
+  --text-xl:   clamp(1.375rem, 1.1rem  + 1.4vw,  2rem);
+  --text-2xl:  clamp(2rem,     1.5rem  + 2.5vw,  3.5rem);
+  --text-hero: clamp(3rem,     1.5rem  + 7vw,    7rem);
+
+  /* Spacing */
+  --space-section: clamp(4rem, 3rem + 5vw, 10rem);
+  --space-gutter:  clamp(1rem, 0.5rem + 2.5vw, 2rem);
+
+  /* Max widths */
+  --max-content: 1200px;
+  --max-prose:   720px;
+
+  /* Motion */
+  --duration-fast:   150ms;
+  --duration-normal: 300ms;
+  --duration-slow:   600ms;
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Base Reset ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-chalk);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.65;
+}
+
+/* ── Lime Exception: text-lime elements use Syne ─────────────── */
+.text-lime,
+.text-lime-deep {
+  font-family: var(--font-syne), sans-serif;
+}
+
+/* ── Focus Styles ─────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Selection ────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-lime);
+  color: var(--color-ink);
+}
+
+/* ── Scrollbar (Webkit) ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-chalk);
+}

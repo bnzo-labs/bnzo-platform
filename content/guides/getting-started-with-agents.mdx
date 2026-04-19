@@ -1,0 +1,44 @@
+---
+title: Getting started with agent-built software
+description: Five-minute primer on building production software with Claude agents — not toy demos.
+heroImage: /images/learn/agents-primer.svg
+tags:
+  - agents
+  - claude
+  - getting-started
+readingMinutes: 5
+---
+
+# Getting started with agent-built software
+
+Agents are not magic. They are loops. Prompt → tool call → result → prompt. That's it.
+
+## The three things you need
+
+1. **A tight prompt.** Specific role. Specific output format. No fluff.
+2. **A bounded tool set.** The agent can only do what you let it do.
+3. **A stop condition.** Budget cap, tool call cap, or explicit "done" tool.
+
+Miss any of those, the loop runs forever or drifts.
+
+## The first agent to build
+
+Don't start with a planner. Don't start with a multi-agent swarm. Start with one agent that does one thing. File editor. Code reviewer. Test runner. Single job.
+
+Once one agent works reliably, chain two. Then three. Not before.
+
+## What changes at the second agent
+
+The moment you have two agents, you need a contract. Agent A produces X, agent B consumes X. Define X as a schema. Zod, JSON schema, whatever. If agents pass unstructured strings to each other, behavior collapses inside a week.
+
+## What to ignore
+
+- Agent "frameworks" with 2000 stars and no production users.
+- Auto-generating prompt chains longer than four hops.
+- Multi-agent "debates" as a solution to accuracy problems.
+
+Accuracy is won by tight prompts and bounded tools. Not by more agents.
+
+## Next
+
+Read the [bnzo starter kit](/build/starter-kit) for the multi-domain skeleton. Or read the [jailbreak case study](https://lab.bnzo.io/jailbreak-live) for a real agent-in-production example.

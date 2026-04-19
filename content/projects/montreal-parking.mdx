@@ -1,0 +1,48 @@
+---
+title: Montreal Parking
+description: Agent concierge that finds, books, and tracks street parking.
+status: In Progress
+heroImage: /images/lab/parking-app.svg
+problem: Finding street parking wastes driver time and fuel. Existing apps show lots, not live streets.
+architecture:
+  stack:
+    - Next.js 14
+    - Supabase
+    - Mapbox
+    - Anthropic Claude
+  decisions:
+    - Agent handles search → book → remind loop
+    - Community-reported availability + historical signal
+    - Mapbox for geospatial, Supabase PostGIS for queries
+agents:
+  - planner
+  - nextjs-developer
+  - ai-agent-developer
+  - database-reviewer
+result:
+  metrics:
+    - Closed alpha in 2 neighborhoods
+    - Avg 4 min saved per trip (self-reported)
+  outcomes:
+    - Validated agent-driven concierge pattern
+    - Identified data-gap problem
+learnings:
+  went_well:
+    - Agent UX felt natural for drivers
+    - PostGIS handled load
+  didnt:
+    - Data freshness is the hard problem
+    - iOS background location limits hit us
+---
+
+Montreal's street parking is genuinely hard. Signs conflict with each other. Rules change by time of day, day of week, season, and borough. No single source of truth exists.
+
+Montreal Parking started as an agent concierge: tell it where you're going, it finds parking near your destination, books it if available, and reminds you when your time is up. The agent handles the whole loop — search, confirm, remind.
+
+The architecture is straightforward. Mapbox renders the map. PostGIS handles geospatial queries. Supabase stores availability reports from the community. The agent reads current rules, checks historical availability patterns, and makes a recommendation.
+
+The data problem is unsolvable with current infrastructure. Real-time street-level availability doesn't exist as an API. We're relying on community reports, which decay in accuracy within an hour. The agent is only as good as the data it reads.
+
+iOS background location was the other wall. The app needs to remind you before your meter expires. iOS aggressively terminates background processes. We're working around it with push notification scheduling, but it's fragile.
+
+Alpha is live in Plateau-Mont-Royal and Mile End. Early users say it saves ~4 minutes per trip. The data quality problem is what we're solving next.
