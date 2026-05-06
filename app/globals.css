@@ -93,3 +93,81 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-chalk);
 }
+
+/* ── Noise texture overlay ────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/></filter><rect width='256' height='256' filter='url(%23n)'/></svg>");
+  background-size: 256px 256px;
+}
+
+/* ── Scroll reveal ────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 400ms var(--ease-out-expo),
+    transform 400ms var(--ease-out-expo);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Site header ──────────────────────────────────────────────── */
+@keyframes site-header-badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+.site-header-badge-pulse {
+  animation: site-header-badge-pulse 300ms ease-out;
+}
+
+/* ── Link underline sweep ─────────────────────────────────────── */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  width: 0;
+  background-color: currentColor;
+  transition: width 200ms ease-out;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Hero stagger animations ──────────────────────────────────── */
+@keyframes hero-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-line {
+  animation: hero-line-in 400ms var(--ease-out-expo) both;
+}
+
+.hero-line-0 { animation-delay: 0ms; }
+.hero-line-1 { animation-delay: 80ms; }
+.hero-line-2 { animation-delay: 160ms; }
+.hero-line-3 { animation-delay: 240ms; }
+.hero-line-4 { animation-delay: 320ms; }

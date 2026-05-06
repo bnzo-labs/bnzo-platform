@@ -1,0 +1,52 @@
+---
+title: AIMadeMeDoIt
+description: Monorepo of 21 mobile-first viral mini apps. Beautifully designed, hilariously self-aware single-purpose tools powered by Claude.
+status: In Progress
+heroImage: /images/lab/aimademedoit.svg
+problem: The internet needs more delightful, absurd micro-experiences. Most viral web apps are either too serious or too shallow. There's a gap for beautifully designed, self-aware single-purpose tools that take themselves completely seriously.
+architecture:
+  stack:
+    - Turborepo
+    - pnpm workspaces
+    - Vite + React
+    - Claude Haiku
+    - Vercel
+  decisions:
+    - Turborepo enables parallel development across 21 apps with a shared component library
+    - Vite for instant HMR and tiny production bundles on mobile 4G
+    - Client-side Claude Haiku — personality without server costs
+    - No Tailwind — custom CSS per app to avoid template look
+agents:
+  - architect
+  - developer-shared
+  - developer-landing
+  - developer-overthinking
+  - developer-apology
+  - developer-outfit
+  - developer-excuse
+  - developer-translator
+result:
+  metrics:
+    - 21 apps planned across 4 parallel waves
+    - Sub-2s mobile load target per app
+  outcomes:
+    - Shared @my-ai/shared package reduces per-app boilerplate
+    - Social share cards built into every app for distribution
+learnings:
+  went_well:
+    - Monorepo scaffold lets 8 agents build apps simultaneously
+    - Shared useClaudeAPI hook standardizes LLM calls across all 21 apps
+  didnt:
+    - Client-side Claude key exposure requires careful usage cap design
+    - Maintaining design quality across 21 apps is harder than one
+---
+
+AIMadeMeDoIt started from a simple premise: what if every app took its absurd premise completely seriously?
+
+The internet is full of joke apps that wink at you. What we wanted was the opposite — beautifully designed, polished micro-experiences where the joke is the premise, not the execution. An Overthinking Detector built with the same care as a real productivity tool. An Apology Quality Scorer with a real rubric and real scoring logic.
+
+The technical challenge is scale. 21 apps with consistent quality means you can't build them one at a time. The monorepo structure lets agents work in parallel — Wave 2 ships 7 apps simultaneously, Wave 3 ships 7 more. The shared package handles the plumbing: Claude API calls, local storage, social sharing, and the watermark that ties the brand together.
+
+CSS is custom per app, not Tailwind. Every app needs to look intentional, not templated. That constraint adds time but it's non-negotiable.
+
+Launch strategy mirrors the product: one app per day for 21 days on Twitter/X, then a Product Hunt bundle launch.

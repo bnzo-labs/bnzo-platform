@@ -11,10 +11,10 @@ export async function SelectedWork() {
     <section
       id="work"
       aria-labelledby="work-heading"
-      className="border-b border-slate/15"
+      className="border-b border-slate/15 backdrop-blur-md bg-white/[0.04] border-t border-white/10"
     >
       <div className="mx-auto max-w-content px-gutter py-24 md:py-32">
-        <div className="mb-16 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="mb-16 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal data-reveal-delay="0">
           <div>
             <p className="mb-3 font-mono text-xs uppercase tracking-widest text-slate">
               Selected work
@@ -28,7 +28,7 @@ export async function SelectedWork() {
           </div>
           <a
             href={LAB_URL}
-            className="font-mono text-xs uppercase tracking-widest text-chalk/70 transition-colors duration-fast hover:text-lime"
+            className="link-underline font-mono text-xs uppercase tracking-widest text-chalk/70 transition-colors duration-fast hover:text-lime"
           >
             All case studies →
           </a>
@@ -36,10 +36,10 @@ export async function SelectedWork() {
 
         <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-slate/20 bg-slate/20 md:grid-cols-2">
           {projects.map((project, idx) => (
-            <li key={project.slug} className="bg-ink">
+            <li key={project.slug} className="bg-ink" data-reveal data-reveal-delay={String(idx * 80)}>
               <a
                 href={`${LAB_URL}/${project.slug}`}
-                className="group flex h-full flex-col gap-6 p-8 transition-colors duration-normal hover:bg-white/[0.03] md:p-10"
+                className="group flex h-full flex-col gap-6 p-8 transition-all duration-200 ease-out-expo hover:bg-white/[0.03] hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.97] md:p-10"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs uppercase tracking-widest text-slate">

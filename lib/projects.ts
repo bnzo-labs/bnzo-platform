@@ -30,6 +30,17 @@ export interface Project {
 }
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'projects')
+const IMAGE_DIR = path.join(process.cwd(), 'public', 'images', 'lab')
+const IMAGE_EXTS = ['png', 'jpg', 'jpeg', 'webp', 'PNG', 'JPG', 'JPEG']
+
+export function getProjectImageSrc(slug: string): string | null {
+  for (const ext of IMAGE_EXTS) {
+    if (fs.existsSync(path.join(IMAGE_DIR, `${slug}.${ext}`))) {
+      return `/images/lab/${slug}.${ext}`
+    }
+  }
+  return null
+}
 
 function rowToProject(row: ProjectRow): Project {
   return {

@@ -1,0 +1,49 @@
+---
+title: Nomo
+description: Montreal parking sign scanner that tells you if you can park, for how long, and reminds you before restrictions kick in.
+status: In Progress
+heroImage: /images/lab/parking-app.svg
+problem: Montreal parking signs are genuinely confusing. Rules change by time of day, day of week, season, and borough. Signs conflict with each other. No single source of truth exists. Drivers park, guess wrong, and get tickets. The problem is legibility, not availability.
+architecture:
+  stack:
+    - Expo 54
+    - React Native 0.81.5
+    - Expo Router 6
+    - Supabase
+    - Mapbox
+    - OpenAI Vision
+  decisions:
+    - Camera → OpenAI Vision → structured parking verdict — no manual sign parsing
+    - Supabase for scan history, reminders, and auth
+    - Expo notifications for meter expiry reminders (iOS background limits worked around)
+    - Mapbox for geospatial rendering of nearby zones
+agents:
+  - planner
+  - nextjs-developer
+  - ai-agent-developer
+  - database-reviewer
+result:
+  metrics:
+    - MVP ~35% complete
+    - Home screen, scan history, and reminders functional
+  outcomes:
+    - Scan + verdict pipeline architecture validated
+    - Free scan limit (3/day by device) enforced without accounts
+learnings:
+  went_well:
+    - Expo SDK 54 + Expo Router 6 file-based routing is stable
+    - Supabase + AsyncStorage fallback for offline scan history works
+  didnt:
+    - Google + Apple OAuth not completing — Wave R recovery needed
+    - i18n context scaffolded but language switching broken
+---
+
+Nomo is a Montreal-specific parking sign scanner. Point the camera at a sign, get a plain-language verdict: can you park, for how long, and when does the next restriction kick in.
+
+The core pipeline is camera → OpenAI Vision → structured JSON verdict → rendered result screen. The AI reads the sign so you don't have to decode Montreal's layered restriction system. Signs with time-of-day rules, seasonal restrictions, and borough-specific exceptions are all handled by the model.
+
+The notification loop is the killer feature. Nomo knows when your time is up. It sends a reminder before the restriction kicks in so you can move the car or top up. On iOS, this required working around aggressive background process termination — reminders are scheduled as push notifications at scan time, not managed by a background process.
+
+MVP is at ~35%. The scan history and home screen are working. Auth broke during setup (Google/Apple OAuth not completing the callback), and i18n language switching needs a fix pass before the next wave.
+
+Wave 3 completes the core pipeline: OpenAI Vision integration, scan result screen polish, and address search. Bilingual FR/EN from launch — Montreal is bilingual, so the app is too.

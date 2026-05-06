@@ -38,9 +38,9 @@ const GUIDES: readonly Guide[] = [
 
 export function GuidesPlaceholder() {
   return (
-    <section aria-labelledby="guides-heading" className="bg-chalk">
+    <section aria-labelledby="guides-heading" className="backdrop-blur-sm bg-black/[0.03] border-t border-slate/10">
       <div className="mx-auto max-w-content px-gutter py-24 md:py-32">
-        <header className="mb-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <header className="mb-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between" data-reveal data-reveal-delay="0">
           <div>
             <p className="mb-3 font-mono text-xs uppercase tracking-widest text-slate">
               Library
@@ -65,9 +65,11 @@ export function GuidesPlaceholder() {
             <li
               key={g.code}
               aria-disabled="true"
+              data-reveal
+              data-reveal-delay={String(i * 80)}
               className={[
-                'group relative flex flex-col gap-4 rounded-lg border border-slate/20 bg-ink/[0.03] p-6 transition-colors',
-                'cursor-not-allowed',
+                'group relative flex flex-col gap-4 rounded-lg border border-slate/20 bg-ink/[0.03] p-6 transition-all duration-200 ease-out-expo',
+                'cursor-not-allowed hover:border-slate/40',
                 i % 3 === 0 ? 'md:p-8' : '',
               ].join(' ')}
             >

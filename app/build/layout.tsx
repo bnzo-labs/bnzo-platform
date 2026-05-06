@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Wordmark } from '@/components/brand/Wordmark'
 import { Footer } from '@/components/brand/Footer'
+import { SiteHeader } from '@/components/brand/SiteHeader'
+import { ScrollReveal } from '@/components/home/ScrollReveal'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://build.bnzo.io'),
@@ -25,6 +25,11 @@ export const metadata: Metadata = {
   },
 }
 
+const buildNav = [
+  { label: 'Resources', href: '/' },
+  { label: 'About', href: 'https://bnzo.io', external: true },
+]
+
 export default function BuildLayout({
   children,
 }: {
@@ -32,40 +37,9 @@ export default function BuildLayout({
 }) {
   return (
     <div className="min-h-screen bg-chalk text-ink">
-      <header className="border-b border-slate/20">
-        <nav className="mx-auto flex max-w-content items-center justify-between px-6 py-5">
-          <Link
-            href="/"
-            className="text-xl"
-            aria-label="Build home"
-          >
-            <Wordmark variant="full" tone="deep" />
-          </Link>
-          <ul className="flex items-center gap-8 font-sans text-sm text-ink/80">
-            <li>
-              <Link href="/" className="transition-colors hover:text-ink">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className="transition-colors hover:text-ink">
-                Resources
-              </Link>
-            </li>
-            <li>
-              <a
-                href="https://bnzo.io"
-                className="transition-colors hover:text-ink"
-              >
-                About
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-
+      <ScrollReveal />
+      <SiteHeader tone="light" navLinks={buildNav} />
       <main>{children}</main>
-
       <Footer />
     </div>
   )

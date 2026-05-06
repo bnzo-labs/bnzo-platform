@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative overflow-hidden bg-ink text-chalk"
+      className="relative overflow-hidden text-chalk"
     >
       <div
         aria-hidden="true"
@@ -18,11 +18,11 @@ export function Hero() {
       />
 
       <div className="relative mx-auto max-w-content px-gutter py-section">
-        <p className="mb-8 font-mono text-xs uppercase tracking-[0.25em] text-slate">
+        <p className="hero-line hero-line-0 mb-8 font-mono text-xs uppercase tracking-[0.25em] text-slate">
           bnzo studio / 2026 —
         </p>
 
-        <div className="flex items-baseline gap-4">
+        <div className="hero-line hero-line-1 flex items-baseline gap-4">
           <Wordmark
             variant="full"
             className="text-[length:var(--text-hero)] leading-none"
@@ -33,17 +33,16 @@ export function Hero() {
           id="hero-heading"
           className="mt-8 max-w-3xl font-geist font-bold tracking-tighter text-[length:var(--text-2xl)] leading-[1.05]"
         >
-          We build with agents.
-          <br />
-          <span className="text-slate"> we teach how.</span>
+          <span className="hero-line hero-line-2 block">We build with agents.</span>
+          <span className="hero-line hero-line-3 block text-slate"> we teach how.</span>
         </h1>
 
-        <p className="mt-6 max-w-prose font-sans text-[length:var(--text-lg)] text-chalk/80">
+        <p className="hero-line hero-line-4 mt-6 max-w-prose font-sans text-[length:var(--text-lg)] text-chalk/80">
           We ship production software with AI agents. Apps, SaaS, automations.
           Then we teach teams the playbook.
         </p>
 
-        <div className="mt-12 max-w-xl">
+        <div className="mt-12 max-w-xl" data-reveal data-reveal-delay="0">
           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-slate">
             — field notes, drops occasionally
           </p>

@@ -27,7 +27,7 @@ export function Wordmark({
         className={`font-mono font-bold tracking-tight ${className}`}
         aria-label="bnzo"
       >
-        b/
+        /b
       </span>
     )
   }

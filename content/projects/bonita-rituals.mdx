@@ -1,46 +1,49 @@
 ---
 title: Bonita Rituals
-description: Commerce site for a rituals brand. Agent-curated bundles, Shopify backend.
+description: Private management system for a solo lash technician in Montreal. Digital consent forms, client registry, and technician dashboard — trilingüal.
 status: Live
 heroImage: /images/lab/bonita-rituals.svg
-problem: Brand needed a storefront that matched editorial identity and supported agent-curated product bundles.
+problem: Paper-based consent forms and scattered client records create compliance risk and operational overhead for solo beauty practitioners. Every appointment needs a signed form. Every form needs to be stored. The technician was drowning in paper.
 architecture:
   stack:
     - Next.js 14
-    - Shopify Storefront API
-    - Sanity CMS
-    - Tailwind
+    - TypeScript
+    - Supabase
+    - Tailwind + shadcn/ui
+    - next-intl
+    - "@react-pdf/renderer"
   decisions:
-    - Headless Shopify for commerce, Sanity for editorial
-    - Agent generates bundle copy from SKU metadata
-    - ISR for product pages; on-demand revalidation on SKU change
+    - Two zones — public /consent (no auth) and protected /dashboard (Supabase auth)
+    - Trilingual from day one — ES, EN, FR for Montreal clientele
+    - Consent forms generate downloadable PDFs via react-pdf
+    - Service-role Supabase client for all writes — no client-side DB access
 agents:
   - planner
-  - ui-designer
   - nextjs-developer
+  - database-reviewer
   - code-reviewer
 result:
   metrics:
-    - "3.2s → 0.9s LCP"
-    - 22% conversion lift vs previous site
+    - Paper forms fully replaced
+    - Client registry centralized from scattered notes
   outcomes:
-    - Editorial identity preserved with fast commerce
-    - Agent copy passed brand review
+    - Technician manages all clients from one dashboard
+    - Clients sign consent forms on their own device before appointments
 learnings:
   went_well:
-    - Headless split scaled well
-    - Agent bundle copy matched brand voice
+    - Supabase auth with middleware guard was straightforward
+    - PDF generation via react-pdf matched the form layout exactly
   didnt:
-    - Sanity preview setup took longer than expected
-    - Image CDN needed manual tuning
+    - next-intl routing with Supabase middleware required careful ordering
+    - Module 2 scope expanded — PDF signing added complexity
 ---
 
-Bonita Rituals is a wellness brand with strong editorial DNA. The previous site was Shopify out of the box — functional, but it looked like every other Shopify store. The brand needed something that felt intentional.
+Bonita Rituals is a private operations tool for a solo lash technician in Montreal. The public story is simple: clients get a link before their appointment, fill out a consent form in their language, and sign. The technician sees the signed form in her dashboard before the client arrives.
 
-The split architecture made sense immediately. Shopify owns commerce: cart, checkout, inventory, payments. Sanity owns editorial: ritual guides, brand story, ingredient sourcing. Next.js renders both in a single coherent experience.
+The less visible part is the client registry. Every repeat client has a record — preferences, sensitivities, appointment history. Before the app, that lived in a notebook and scattered DMs. Now it's searchable.
 
-The agent piece was bundle copy. Given a list of SKUs with metadata — ingredients, benefits, scent profiles — the agent generates bundle descriptions in the brand's voice. We reviewed the first batch manually. It passed. We've stopped reviewing.
+The two-zone architecture came from the access model. Consent forms are public — no login, no friction for clients. The dashboard is fully protected via Supabase auth. Middleware enforces the split.
 
-LCP went from 3.2s to 0.9s. That came from image optimization and ISR — not from any clever trick. The conversion lift was real but attribution is messy; the redesign and the copy improvements happened simultaneously.
+Trilingual support was non-negotiable. The technician serves Spanish, English, and French-speaking clients. next-intl handles the routing. Every form field, every error message, every PDF label has three versions.
 
-Sanity preview was the time sink. The preview URL scheme required undocumented configuration that took half a day to find. That's in our notes now.
+PDF generation was the technical surprise. react-pdf requires thinking about layout like you're typesetting, not building a web page. Flexbox works, but it's a different mental model. The output is clean.

@@ -1,19 +1,21 @@
 ---
-title: Jailbreak
-description: Browser multiplayer game with Claude-driven NPC agents.
+title: jailbreak.live
+description: AI escape room where Claude agents autonomously navigate a Boot Chamber. Players watch — and interact — as agents reason, plan, and try to escape.
 status: In Progress
 heroImage: /images/lab/jailbreak.svg
-problem: Most multiplayer games use scripted NPCs. What if NPCs reasoned, planned, and reacted in natural language?
+problem: Most multiplayer games use scripted NPCs with decision trees. What if NPCs reasoned, planned, and reacted in natural language? What if the player could watch an AI agent think its way through a game world?
 architecture:
   stack:
     - Colyseus 0.15
     - PixiJS 7
-    - Anthropic Claude
+    - Anthropic Claude Haiku
     - Node.js
+    - Next.js
   decisions:
-    - Colyseus for authoritative server state
-    - Per-agent LLM prompt with tool calls for game actions
-    - Token budget caps per tick to control cost
+    - Colyseus for authoritative server state — agents live server-side, clients see results
+    - PixiJS 7 renderer migrated from Babylon.js for top-down 2D (Brawl Stars style)
+    - Per-agent LLM prompt with bounded tool calls — move, speak, investigate, alert
+    - Token budget caps per tick to keep LLM cost under $0.02 per full match
 agents:
   - game-designer
   - networking-developer
@@ -21,28 +23,28 @@ agents:
   - ai-agent-developer
 result:
   metrics:
-    - 60fps with 8 concurrent agents
+    - 60fps with 8 concurrent Claude agents
     - "< $0.02 per full match in LLM cost"
   outcomes:
-    - Proved agent-driven NPCs ship
-    - Built reusable game-agent harness
+    - Proved agent-driven NPCs are viable in real-time games
+    - Built a reusable game-agent harness with bounded action spaces
 learnings:
   went_well:
-    - Tool-call loop kept agents in bounds
-    - Server-authoritative state prevented cheating
+    - Tool-call loop keeps agents in bounds without guardrail prompts
+    - Server-authoritative state prevents client-side cheating
   didnt:
-    - Early prompts leaked state; required careful redaction
-    - Latency spikes on cold agents
+    - Early prompts leaked state between competing agents — required a redaction layer
+    - Incremental movement took manual fixes to eliminate agent teleporting
 ---
 
-Jailbreak is a browser multiplayer game where the NPCs are Claude agents. Players interact with characters that reason, plan, and respond in natural language. Not scripted. Not decision trees. Actual LLM inference, per tick, per agent.
+jailbreak.live is a browser multiplayer game where the NPCs are Claude agents. Not scripted. Not decision trees. Each agent gets a prompt, a bounded action space, and a per-tick LLM call. Players watch the agents reason through the Boot Chamber — and can interact with them.
 
-The architecture question was: how do you run LLM-driven game characters without the game feeling like you're waiting for an API call?
+The core architecture question was latency. How do you run LLM inference per game tick without the game feeling like it's waiting for an API?
 
-The answer: tool calls. Each agent has a limited set of actions — move, speak, investigate, alert. The LLM picks one per turn. The prompt is tight, the action space is bounded, and token budget caps prevent runaway cost.
+The answer: bounded tool calls. Each agent chooses one action per turn from a small set — move, speak, investigate, alert. The prompt is tight, the context is filtered to what the agent can actually see, and token budget caps prevent runaway cost. Colyseus enforces the game state server-side. PixiJS renders it client-side.
 
-Colyseus handles server-authoritative state. PixiJS renders client-side. The agents live on the server. Clients see the result of agent decisions, not the decisions themselves.
+The renderer migration was the first major rewrite. Babylon.js was overkill for a top-down 2D game. PixiJS 7 is fast, has a stable API, and handles the sprite animation needs without the overhead.
 
-The prompt engineering was the real work. Early versions let agents see full room state, which led to leaked information between "competing" agents. The redaction layer — giving each agent a limited view of game state — fixed behavior but added latency. That latency is still the main open problem.
+The prompt engineering was the real work. Early versions gave agents full room state, which let competing agents implicitly communicate through shared object state. The redaction layer — each agent sees only what's in its line of sight — fixed the behavior but added latency. That's the main open problem.
 
-$0.02 per full match at the current token budget. That's viable.
+Incremental movement took the longest to get right. The agent was teleporting to targets instead of moving step by step. Manual update to the movement system fixed it. Continuous movement toward target is now stable.

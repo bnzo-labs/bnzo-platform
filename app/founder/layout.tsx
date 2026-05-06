@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { Footer } from '@/components/brand/Footer'
+import { SiteHeader } from '@/components/brand/SiteHeader'
+import { ScrollReveal } from '@/components/home/ScrollReveal'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://erick.bnzo.io'),
@@ -25,6 +26,20 @@ export const metadata: Metadata = {
   },
 }
 
+const founderNav = [
+  { label: 'Work', href: '#work' },
+  { label: 'Contact', href: '#contact' },
+]
+
+const FounderWordmark = (
+  <a
+    href="#top"
+    className="font-geist text-lg font-bold tracking-tight transition-colors duration-fast hover:text-lime"
+  >
+    erick<span className="text-lime">.</span>
+  </a>
+)
+
 export default function FounderLayout({
   children,
 }: {
@@ -32,37 +47,12 @@ export default function FounderLayout({
 }) {
   return (
     <div className="min-h-screen bg-ink text-chalk font-sans antialiased">
-      <header className="sticky top-0 z-40 border-b border-slate/15 bg-ink/80 backdrop-blur">
-        <nav
-          aria-label="Founder navigation"
-          className="mx-auto flex max-w-content items-center justify-between px-gutter py-5"
-        >
-          <Link
-            href="#top"
-            className="font-geist text-lg font-bold tracking-tight transition-colors duration-fast hover:text-lime"
-          >
-            erick<span className="text-lime">.</span>
-          </Link>
-          <ul className="flex items-center gap-6 text-sm font-mono uppercase tracking-widest text-chalk/70">
-            <li>
-              <a
-                href="#work"
-                className="transition-colors duration-fast hover:text-lime"
-              >
-                Work
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className="transition-colors duration-fast hover:text-lime"
-              >
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <ScrollReveal />
+      <SiteHeader
+        tone="dark"
+        navLinks={founderNav}
+        centerSlot={FounderWordmark}
+      />
       <main id="top">{children}</main>
       <Footer />
     </div>

@@ -16,7 +16,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   return (
     <Link
       href={`/${resource.slug}`}
-      className="group relative flex flex-col justify-between rounded-lg border border-slate/30 bg-black/[0.04] p-6 transition-colors duration-normal ease-out-expo hover:border-lime-deep"
+      className="group relative flex flex-col justify-between rounded-lg border border-slate/30 bg-black/[0.04] p-6 transition-all duration-200 ease-out-expo hover:border-lime-deep hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_0_0_1px_rgba(63,95,0,0.25),0_8px_32px_rgba(63,95,0,0.08)] active:scale-[0.97]"
     >
       <div>
         <div className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-slate">
@@ -36,7 +36,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         <span className="font-geist text-2xl font-bold text-ink">
           {isFree ? 'Free' : formatPrice(resource.price)}
         </span>
-        <span className="font-mono text-xs uppercase tracking-wider text-ink transition-colors group-hover:text-lime-deep">
+        <span className="link-underline font-mono text-xs uppercase tracking-wider text-ink transition-colors group-hover:text-lime-deep">
           {cta} →
         </span>
       </div>

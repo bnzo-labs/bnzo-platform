@@ -1,19 +1,21 @@
 ---
-title: Cook for Friends
-description: Recipe coordination app for shared dinners. Agent-assisted meal planning.
-status: Beta
+title: Cook For Friends
+description: Business management hub for a Montreal home cook turned entrepreneur. Orders, clients, courses, finances, and an AI agent — in one dashboard.
+status: Live
 heroImage: /images/lab/cook-for-friends.svg
-problem: Groups struggle to coordinate dinners. Dietary conflicts, duplicate ingredients, and last-minute chaos waste time and food.
+problem: Growing a solo food business on the side of a full-time life means managing orders, clients, courses, and finances across scattered tools. WhatsApp for orders, spreadsheets for clients, mental math for revenue. A unified dashboard with an embedded AI agent removes that operational overhead.
 architecture:
   stack:
     - Next.js 14
+    - TypeScript
     - Supabase
-    - Anthropic Claude
-    - Tailwind
+    - Tailwind + shadcn/ui
+    - OpenAI GPT-4o
   decisions:
-    - Agent plans menus from group preferences
-    - Server actions for coordination; no client-side state
-    - Supabase realtime for shared grocery list
+    - All writes via Supabase service role — no client-side DB access
+    - AI agent (Muffi) embedded as a floating chat interface for quick ops queries
+    - Optimistic updates on social posts with rollback on failure
+    - Mobile-first table layout — the owner manages from her phone
 agents:
   - planner
   - nextjs-developer
@@ -21,26 +23,26 @@ agents:
   - code-reviewer
 result:
   metrics:
-    - 40 dinners coordinated in closed beta
-    - 85% repeat usage among hosts
+    - Live in production at horno.cookforfriends.ca
+    - Orders, clients, courses, and finances all tracked in one place
   outcomes:
-    - Validated agent-first product loop
-    - Uncovered dietary-preference edge cases
+    - Owner replaced spreadsheets and scattered notes with a single dashboard
+    - AI agent handles quick revenue queries without manual calculation
 learnings:
   went_well:
-    - Agent framing reduced UX complexity
-    - Supabase realtime was trivial to wire
+    - Supabase realtime for shared state was trivial to wire
+    - Optimistic updates on social post management felt instant
   didnt:
-    - Grocery store API integration slipped scope
-    - Underestimated cold-start latency for LLM calls
+    - Blotato social posting integration required API key setup outside the sprint
+    - Muffi agent needs to be replaced with Genaro (bnzo-agency) for better context
 ---
 
-Cook for Friends started as a question: can an agent replace the group chat chaos that happens before every shared dinner?
+Cook For Friends is a home kitchen business in Montreal. The owner, Carolina, cooks for private clients, runs courses, and manages a growing roster through word of mouth. The operational overhead was all manual — orders tracked in WhatsApp, clients in a spreadsheet, revenue in her head.
 
-The answer is mostly yes. The agent handles menu planning, dietary conflict resolution, and grocery list generation. Hosts share a link. Guests mark preferences. The agent proposes a menu that works for everyone.
+The dashboard covers the full operational surface: orders, clients, courses, and finances. Each section has a table with real data, not mockups. KPIs on the home screen give a quick view of the month.
 
-The hard part wasn't the LLM. It was the edge cases: vegan + nut allergy + gluten-free in the same group, or guests who don't respond before the planning deadline. We handled both. The grocery API integration didn't make the beta cut.
+The AI agent (Muffi) lives in the lower-right corner — a floating chat interface that answers operational questions without requiring Carolina to navigate to a specific page. "How much did I make last month?" is faster than opening the finances tab.
 
-Cold-start latency on the LLM calls was the other surprise. Users tolerate it once they understand the agent is "thinking," but the first load before any context is cached is rough.
+Social media management is the newest addition. The dashboard has a three-tab social section: scheduled posts, brand guidelines, and analytics. Posts are managed with optimistic updates — changes appear immediately, roll back cleanly on failure.
 
-Still in beta. The core loop works. Expanding to larger groups is the next milestone.
+The next phase replaces Muffi (OpenAI) with Genaro, the bnzo-agency agent with full business context. That upgrade makes the agent actually aware of Carolina's clients, orders, and preferences — not just a generic assistant.

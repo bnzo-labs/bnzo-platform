@@ -69,12 +69,12 @@ export function EmailCapture({ source = 'bnzo', className = '' }: EmailCapturePr
         disabled={status === 'loading'}
         aria-invalid={status === 'error'}
         aria-describedby="email-capture-feedback"
-        className="flex-1 rounded-md border border-slate/40 bg-transparent px-4 py-3 text-chalk placeholder:text-slate focus:border-lime focus:outline-none focus-visible:outline-none"
+        className="flex-1 rounded-md border border-slate/40 bg-transparent px-4 py-3 text-chalk placeholder:text-slate transition-shadow duration-fast focus:border-lime focus:outline-none focus:shadow-[0_0_0_3px_rgba(200,255,0,0.15)] focus-visible:outline-none"
       />
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="rounded-md bg-lime px-6 py-3 font-sans font-medium text-ink transition-colors duration-fast hover:bg-chalk disabled:opacity-60"
+        className="rounded-md bg-lime px-6 py-3 font-sans font-medium text-ink transition-all duration-fast active:scale-[0.97] hover:bg-chalk disabled:opacity-60"
       >
         {status === 'loading' ? 'sending...' : 'subscribe'}
       </button>
