@@ -163,31 +163,28 @@ export function getProjectBySlug(slug: string): Promise<Project | null>
 ### `@/components/brand/Wordmark`
 ```tsx
 type WordmarkProps = {
-  variant?: 'full' | 'mark'   // default 'full'
+  variant?: 'compact' | 'full'   // default 'full' — NOTE: 'compact' renders b/, NOT 'mark'
   className?: string
-  as?: 'span' | 'h1' | 'div'  // default 'span'
+  as?: 'span' | 'h1' | 'div'    // default 'span'
 }
 
 export function Wordmark(props: WordmarkProps): JSX.Element
 ```
 - `full` → text `bnzo.` (period uses `text-lime`)
-- `mark` → text `b/` in Geist Mono
+- `compact` → text `b/` in Geist Mono
+- W1-A corrected 2026-05-09 per DISCOVERY.md audit: variant is `'compact' | 'full'`, NOT `'mark' | 'full'`.
 
 ### `@/components/brand/Footer`
 ```tsx
-type FooterDomain = 'home' | 'build' | 'lab' | 'learn' | 'founder'
-
-type FooterProps = {
-  domain: FooterDomain
-}
-
-export function Footer(props: FooterProps): JSX.Element
+export function Footer(): JSX.Element
 ```
-Renders:
+Footer takes **no props**. Renders:
+- Newsletter column (eyebrow + EmailCapture source="bnzo")
 - Wordmark (full)
 - Cross-domain links (absolute URLs to 5 subdomains)
-- Legal (`/privacy`, `/terms` — resolve to `bnzo.io/privacy` etc.)
-- Tagline: `We build with agents. We teach how.`
+- Social links (X, GitHub)
+- Copyright line
+- W1-A corrected 2026-05-09 per DISCOVERY.md audit: no `domain` prop — Footer is prop-free.
 
 ---
 
@@ -219,6 +216,50 @@ tags: [mobile, supabase, realtime]
 heroImage: /images/projects/cook-for-friends.jpg
 ---
 ```
+
+### `content/work/*.mdx`
+```yaml
+---
+slug: cook-for-friends-mtl
+client: Cook For Friends MTL
+title: Bakery Business OS
+outcome: Bakery business OS + 5-agent content team. Shipped in 3 weeks.
+posterPath: /work/cook-for-friends-mtl.jpg
+mp4Path: /work/cook-for-friends-mtl.mp4
+webmPath: /work/cook-for-friends-mtl.webm
+href: /lab/cook-for-friends
+tags: [Shopify, Next.js, AI Agents]
+---
+```
+
+---
+
+## 9. WorkItem — W1-B (locked 2026-05-10)
+
+Data shape for the home page "Recent Work" gallery (Section 4). Lives in
+`content/work/*.mdx`, loaded via `lib/work.ts → getWorkItems()`.
+
+### `@/lib/work`
+```ts
+export interface WorkItem {
+  slug: string      // matches MDX filename stem
+  client: string    // display name of the client
+  title: string     // project title
+  outcome: string   // one-line result (shown as card headline)
+  posterPath: string  // absolute path to poster jpg, e.g. /work/slug.jpg
+  mp4Path: string     // absolute path to MP4 video, e.g. /work/slug.mp4
+  webmPath: string    // absolute path to WebM video, e.g. /work/slug.webm
+  href: string        // link to lab case study, e.g. /lab/slug
+  tags: string[]      // tech stack tags
+}
+
+export async function getWorkItems(): Promise<WorkItem[]>
+```
+
+Assets live in `public/work/{slug}.{jpg,mp4,webm}`.
+Components: `WorkGrid` (server) + `WorkCard` (client) in `components/home/`.
+Video is lazy-mounted via raw `IntersectionObserver` (`rootMargin: '300px'`).
+No framer-motion. No react-intersection-observer.
 
 ---
 

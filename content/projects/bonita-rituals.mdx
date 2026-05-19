@@ -3,6 +3,7 @@ title: Bonita Rituals
 description: Private management system for a solo lash technician in Montreal. Digital consent forms, client registry, and technician dashboard — trilingüal.
 status: Live
 heroImage: /images/lab/bonita-rituals.svg
+url: ''
 problem: Paper-based consent forms and scattered client records create compliance risk and operational overhead for solo beauty practitioners. Every appointment needs a signed form. Every form needs to be stored. The technician was drowning in paper.
 architecture:
   stack:
@@ -18,10 +19,14 @@ architecture:
     - Consent forms generate downloadable PDFs via react-pdf
     - Service-role Supabase client for all writes — no client-side DB access
 agents:
-  - planner
-  - nextjs-developer
-  - database-reviewer
-  - code-reviewer
+  - name: planner
+    role: Development
+  - name: nextjs-developer
+    role: Development
+  - name: database-reviewer
+    role: Development
+  - name: code-reviewer
+    role: QA
 result:
   metrics:
     - Paper forms fully replaced

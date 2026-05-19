@@ -1,5 +1,13 @@
-import { Wordmark } from '@/components/brand/Wordmark'
-import { EmailCapture } from './EmailCapture'
+import { ArrowRight } from 'lucide-react'
+
+const WORDS = [
+  'Software',
+  "shouldn't",
+  'take',
+  'six',
+  'months',
+  'anymore',
+]
 
 export function Hero() {
   return (
@@ -7,46 +15,54 @@ export function Hero() {
       aria-labelledby="hero-heading"
       className="relative overflow-hidden text-chalk"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, var(--color-chalk) 1px, transparent 1px), linear-gradient(to bottom, var(--color-chalk) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-        }}
-      />
-
       <div className="relative mx-auto max-w-content px-gutter py-section">
-        <p className="hero-line hero-line-0 mb-8 font-mono text-xs uppercase tracking-[0.25em] text-slate">
-          bnzo studio / 2026 —
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-slate mb-6">
+          — BNZO STUDIO / 2026
         </p>
-
-        <div className="hero-line hero-line-1 flex items-baseline gap-4">
-          <Wordmark
-            variant="full"
-            className="text-[length:var(--text-hero)] leading-none"
-          />
-        </div>
 
         <h1
           id="hero-heading"
-          className="mt-8 max-w-3xl font-geist font-bold tracking-tighter text-[length:var(--text-2xl)] leading-[1.05]"
+          className="font-geist font-bold tracking-tighter text-[length:var(--text-hero)] leading-[0.95] text-chalk"
         >
-          <span className="hero-line hero-line-2 block">We build with agents.</span>
-          <span className="hero-line hero-line-3 block text-slate"> we teach how.</span>
+          {WORDS.map((word, i) => (
+            <span key={word} className={`hero-word hero-word-${i}`}>
+              {word}{i < WORDS.length - 1 ? ' ' : ''}
+            </span>
+          ))}<span className="text-lime">.</span>
         </h1>
 
-        <p className="hero-line hero-line-4 mt-6 max-w-prose font-sans text-[length:var(--text-lg)] text-chalk/80">
-          We ship production software with AI agents. Apps, SaaS, automations.
-          Then we teach teams the playbook.
+        <p className="font-sans text-[length:var(--text-lg)] text-chalk/70 max-w-prose mt-6">
+          bnzo is the studio for founders who refuse to wait. AI agents in the
+          build pipeline + senior engineers in the loop = production apps, SaaS,
+          and automations shipped in weeks.
         </p>
 
-        <div className="mt-12 max-w-xl" data-reveal data-reveal-delay="0">
-          <p className="mb-3 font-mono text-xs uppercase tracking-widest text-slate">
-            — field notes, drops occasionally
+        <div
+          className="relative mt-10"
+          style={{
+            background:
+              'radial-gradient(circle at 30% 50%, rgba(200,255,0,0.08) 0%, transparent 60%)',
+          }}
+        >
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href="https://cal.com/erick-bnzo/discovery"
+              className="inline-flex items-center gap-2 bg-lime text-ink font-mono text-sm font-medium px-6 py-3 rounded-[6px] shadow-lime-glow hover:scale-[1.02] active:scale-[0.98] transition duration-normal ease-out-expo"
+            >
+              Book a call
+              <ArrowRight size={14} strokeWidth={2} />
+            </a>
+            <a
+              href="#recent-work"
+              className="inline-flex items-center gap-1.5 font-mono text-sm text-chalk/60 hover:text-chalk transition duration-fast"
+            >
+              See recent work
+              <ArrowRight size={12} strokeWidth={2} />
+            </a>
+          </div>
+          <p className="font-mono text-xs uppercase tracking-widest text-slate mt-8">
+            TRUSTED BY · COOK FOR FRIENDS MTL · BONITA RITUALS · JAILBREAK.LIVE · AIMADEMEDOIT
           </p>
-          <EmailCapture source="bnzo" />
         </div>
       </div>
     </section>

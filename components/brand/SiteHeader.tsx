@@ -61,7 +61,9 @@ export function SiteHeader({
   const isDark = tone === 'dark'
   const showBadge = enableHeroMorph && !heroVisible
 
-  const bgBorder = isDark ? 'bg-ink/60 border-white/10' : 'bg-chalk/60 border-slate/15'
+  const bgBorder = isDark
+    ? 'bg-ink/60 border-white/8 backdrop-blur-[8px]'
+    : 'bg-chalk/70 border-slate/12 backdrop-blur-[8px]'
   const linkClass = isDark
     ? 'text-chalk/70 hover:text-chalk transition-colors duration-fast link-underline'
     : 'text-ink/70 hover:text-ink transition-colors duration-fast link-underline'
@@ -69,7 +71,7 @@ export function SiteHeader({
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b backdrop-blur-md ${bgBorder} transition-opacity duration-200 ease-out ${mounted ? 'opacity-100' : 'opacity-0'}`}
+      className={`sticky top-0 z-50 border-b ${bgBorder} transition-opacity duration-200 ease-out ${mounted ? 'opacity-100' : 'opacity-0'}`}
     >
       <div className="mx-auto grid max-w-content grid-cols-[1fr_auto_1fr] items-center gap-4 px-gutter py-4">
         {/* Left: nav links */}
@@ -121,14 +123,14 @@ export function SiteHeader({
             cta.external ? (
               <a
                 href={cta.href}
-                className={`font-mono text-xs uppercase tracking-widest active:scale-[0.97] ${linkClass}`}
+                className="font-mono text-xs uppercase tracking-widest text-lime hover:text-lime/80 transition-colors duration-fast active:scale-[0.97]"
               >
                 {cta.label}
               </a>
             ) : (
               <Link
                 href={cta.href}
-                className={`font-mono text-xs uppercase tracking-widest active:scale-[0.97] ${linkClass}`}
+                className="font-mono text-xs uppercase tracking-widest text-lime hover:text-lime/80 transition-colors duration-fast active:scale-[0.97]"
               >
                 {cta.label}
               </Link>

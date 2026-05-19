@@ -16,11 +16,16 @@ architecture:
     - PixiJS 7 renderer migrated from Babylon.js for top-down 2D (Brawl Stars style)
     - Per-agent LLM prompt with bounded tool calls — move, speak, investigate, alert
     - Token budget caps per tick to keep LLM cost under $0.02 per full match
+url: https://jailbreak.live
 agents:
-  - game-designer
-  - networking-developer
-  - engine-developer
-  - ai-agent-developer
+  - name: game-designer
+    role: Design
+  - name: networking-developer
+    role: Development
+  - name: engine-developer
+    role: Development
+  - name: ai-agent-developer
+    role: Development
 result:
   metrics:
     - 60fps with 8 concurrent Claude agents

@@ -16,11 +16,16 @@ architecture:
     - AI agent (Muffi) embedded as a floating chat interface for quick ops queries
     - Optimistic updates on social posts with rollback on failure
     - Mobile-first table layout — the owner manages from her phone
+url: https://horno.cookforfriends.ca
 agents:
-  - planner
-  - nextjs-developer
-  - ai-agent-developer
-  - code-reviewer
+  - name: planner
+    role: Development
+  - name: nextjs-developer
+    role: Development
+  - name: ai-agent-developer
+    role: Development
+  - name: code-reviewer
+    role: QA
 result:
   metrics:
     - Live in production at horno.cookforfriends.ca

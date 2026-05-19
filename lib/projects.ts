@@ -6,18 +6,24 @@ import type { ProjectRow } from './cms-schemas'
 
 export type ProjectStatus = 'Live' | 'Beta' | 'In Progress'
 
+export interface AgentEntry {
+  name: string
+  role: string
+}
+
 export interface Project {
   slug: string
   title: string
   description: string
   status: ProjectStatus
   heroImage: string
+  url?: string
   problem: string
   architecture: {
     stack: string[]
     decisions: string[]
   }
-  agents: string[]
+  agents: AgentEntry[]
   result: {
     metrics: string[]
     outcomes: string[]
@@ -42,6 +48,17 @@ export function getProjectImageSrc(slug: string): string | null {
   return null
 }
 
+function normalizeAgents(raw: unknown[]): AgentEntry[] {
+  return raw.map((a) => {
+    if (typeof a === 'string') return { name: a, role: 'Development' }
+    if (a && typeof a === 'object' && 'name' in a) {
+      const entry = a as { name: string; role?: string }
+      return { name: entry.name, role: entry.role ?? 'Development' }
+    }
+    return { name: String(a), role: 'Development' }
+  })
+}
+
 function rowToProject(row: ProjectRow): Project {
   return {
     slug: row.slug,
@@ -51,7 +68,7 @@ function rowToProject(row: ProjectRow): Project {
     heroImage: row.hero_image,
     problem: row.problem,
     architecture: row.architecture,
-    agents: row.agents,
+    agents: normalizeAgents(row.agents),
     result: row.result,
     learnings: row.learnings,
     body: row.body,
@@ -69,12 +86,13 @@ function parseProjectFile(filename: string): Project {
     description: data.description as string,
     status: data.status as ProjectStatus,
     heroImage: data.heroImage as string,
+    url: data.url as string | undefined,
     problem: data.problem as string,
     architecture: {
       stack: (data.architecture?.stack as string[]) ?? [],
       decisions: (data.architecture?.decisions as string[]) ?? [],
     },
-    agents: (data.agents as string[]) ?? [],
+    agents: normalizeAgents((data.agents as unknown[]) ?? []),
     result: {
       metrics: (data.result?.metrics as string[]) ?? [],
       outcomes: (data.result?.outcomes as string[]) ?? [],
@@ -137,4 +155,17 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 export async function getProjectSlugs(): Promise<string[]> {
   const projects = await getProjects()
   return projects.map((p) => p.slug)
+}
+
+export async function getAdjacentProjects(slug: string): Promise<{
+  prev: Project | null
+  next: Project | null
+}> {
+  const all = await getProjects()
+  const idx = all.findIndex((p) => p.slug === slug)
+  if (idx === -1) return { prev: null, next: null }
+  return {
+    prev: idx > 0 ? all[idx - 1] : null,
+    next: idx < all.length - 1 ? all[idx + 1] : null,
+  }
 }

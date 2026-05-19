@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Footer } from '@/components/brand/Footer'
 import { SiteHeader } from '@/components/brand/SiteHeader'
 import { ScrollReveal } from '@/components/home/ScrollReveal'
+import LabBubblesCanvas from '@/components/lab/LabBubblesCanvas'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lab.bnzo.io'),
@@ -31,11 +32,16 @@ const labNav = [
 
 export default function LabLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-ink text-chalk flex flex-col">
+    <div className="relative min-h-screen bg-ink text-chalk flex flex-col">
       <ScrollReveal />
-      <SiteHeader tone="dark" navLinks={labNav} />
-      <main className="flex-1">{children}</main>
-      <Footer />
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <LabBubblesCanvas />
+      </div>
+      <div className="relative z-10 flex flex-1 flex-col">
+        <SiteHeader tone="dark" navLinks={labNav} />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </div>
     </div>
   )
 }

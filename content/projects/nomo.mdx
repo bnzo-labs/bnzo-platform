@@ -3,6 +3,7 @@ title: Nomo
 description: Montreal parking sign scanner that tells you if you can park, for how long, and reminds you before restrictions kick in.
 status: In Progress
 heroImage: /images/lab/parking-app.svg
+url: ''
 problem: Montreal parking signs are genuinely confusing. Rules change by time of day, day of week, season, and borough. Signs conflict with each other. No single source of truth exists. Drivers park, guess wrong, and get tickets. The problem is legibility, not availability.
 architecture:
   stack:
@@ -18,10 +19,14 @@ architecture:
     - Expo notifications for meter expiry reminders (iOS background limits worked around)
     - Mapbox for geospatial rendering of nearby zones
 agents:
-  - planner
-  - nextjs-developer
-  - ai-agent-developer
-  - database-reviewer
+  - name: planner
+    role: Development
+  - name: nextjs-developer
+    role: Development
+  - name: ai-agent-developer
+    role: Development
+  - name: database-reviewer
+    role: Development
 result:
   metrics:
     - MVP ~35% complete

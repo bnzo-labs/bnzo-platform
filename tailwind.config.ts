@@ -42,6 +42,9 @@ const config: Config = {
         tight: '-0.02em',
         tighter: '-0.04em',
       },
+      boxShadow: {
+        'lime-glow': 'var(--shadow-lime-glow)',
+      },
     },
   },
   plugins: [],

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Wordmark } from './Wordmark'
+import { EmailCapture } from '@/components/home/EmailCapture'
 
 const DOMAINS = [
   { label: 'Studio', href: 'https://bnzo.io', title: 'bnzo Studio — AI development agency' },
@@ -45,6 +46,14 @@ export function Footer() {
     >
       <div className="mx-auto max-w-content px-gutter py-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+
+          {/* Newsletter */}
+          <div className="flex flex-col gap-4">
+            <p className="font-mono text-xs uppercase tracking-widest text-slate">
+              — FIELD NOTES, DROPS OCCASIONALLY
+            </p>
+            <EmailCapture source="bnzo" />
+          </div>
 
           {/* Brand */}
           <div className="flex flex-col gap-3">

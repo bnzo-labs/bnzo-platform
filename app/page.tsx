@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
+import { CursorFollower } from '@/components/brand/CursorFollower'
 import { Hero } from '@/components/home/Hero'
-import { Services } from '@/components/home/Services'
-import { WorkPreview } from '@/components/home/WorkPreview'
+import { Pitch } from '@/components/home/Pitch'
+import { WorkGrid } from '@/components/home/WorkGrid'
+import { Capabilities } from '@/components/home/Capabilities'
+import { Team } from '@/components/home/Team'
+import { Process } from '@/components/home/Process'
+import { FinalCTA } from '@/components/home/FinalCTA'
 import { Footer } from '@/components/brand/Footer'
 import { SiteHeader } from '@/components/brand/SiteHeader'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -11,22 +16,22 @@ import dynamic from 'next/dynamic'
 const BackgroundAnimation = dynamic(() => import('@/components/home/BackgroundAnimation'), { ssr: false })
 
 export const metadata: Metadata = {
-  title: 'Bnzo Studio — We build with agents. We teach how.',
+  title: 'Bnzo Studio — Software shipped in weeks, not months.',
   description:
-    'We ship production software with AI agents. Apps, SaaS, AI automations, and education — from Bnzo Studio.',
+    'bnzo is the studio for founders who refuse to wait. AI agents in the build pipeline + senior engineers in the loop = production apps, SaaS, and automations shipped in weeks.',
   openGraph: {
-    title: 'Bnzo Studio — We build with agents. We teach how.',
+    title: 'Bnzo Studio — Software shipped in weeks, not months.',
     description:
-      'We ship production software with AI agents. Apps, SaaS, AI automations, and education.',
+      'bnzo is the studio for founders who refuse to wait. Production apps, SaaS, and automations shipped in weeks.',
     url: '/',
     siteName: 'Bnzo Studio',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bnzo Studio — We build with agents. We teach how.',
+    title: 'Bnzo Studio — Software shipped in weeks, not months.',
     description:
-      'We ship production software with AI agents. Apps, SaaS, AI automations, and education.',
+      'bnzo is the studio for founders who refuse to wait. Production apps, SaaS, and automations shipped in weeks.',
   },
 }
 
@@ -37,7 +42,7 @@ const organizationSchema = {
   url: 'https://bnzo.io',
   logo: 'https://bnzo.io/logo.png',
   description:
-    'We ship production software with AI agents. Apps, SaaS, AI automations, and education.',
+    'bnzo is the studio for founders who refuse to wait. AI agents in the build pipeline + senior engineers in the loop = production apps, SaaS, and automations shipped in weeks.',
   founder: {
     '@type': 'Person',
     name: 'Erick Benzo',
@@ -49,6 +54,7 @@ const organizationSchema = {
 export default function HomePage() {
   return (
     <main style={{ position: 'relative' }}>
+      <CursorFollower />
       <BackgroundAnimation />
       <ScrollReveal />
       <JsonLd schema={organizationSchema} />
@@ -56,14 +62,20 @@ export default function HomePage() {
         tone="dark"
         enableHeroMorph
         navLinks={[
-          { label: 'Build', href: 'https://build.bnzo.io', external: true },
           { label: 'Lab', href: 'https://lab.bnzo.io', external: true },
           { label: 'Learn', href: 'https://learn.bnzo.io', external: true },
+          { label: 'Build', href: 'https://build.bnzo.io', external: true },
+          { label: 'Founder', href: 'https://erick.bnzo.io', external: true },
         ]}
+        cta={{ label: 'Book a call', href: 'https://cal.com/erick-bnzo/discovery', external: true }}
       />
       <Hero />
-      <Services />
-      <WorkPreview />
+      <Pitch />
+      <WorkGrid />
+      <Capabilities />
+      <Team />
+      <Process />
+      <FinalCTA />
       <Footer />
     </main>
   )

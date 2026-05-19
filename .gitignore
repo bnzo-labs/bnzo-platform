@@ -41,6 +41,9 @@ next-env.d.ts
 SESSION.md
 test-results/
 playwright-report/
+.playwright-mcp
+.claude/
+scripts
 
 # Personal AI config (optional - remove if team should share)
 # CLAUDE.md
