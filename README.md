@@ -112,8 +112,6 @@ bnzo-platform/
 - Small files (<400 lines); extract utilities.
 - TypeScript strict — no `any`.
 
-See [CLAUDE.md](CLAUDE.md) for the full working contract.
-
 ---
 
 Maintained by [@benerick](https://github.com/benerick).
